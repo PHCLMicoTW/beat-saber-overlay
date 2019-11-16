@@ -2,6 +2,8 @@
 
 # (Unnamed) Beat Saber Overlay - With lyric displayer
 
+![Screenshot](https://i.imgur.com/4mR98Ei.png)
+
 A web-based overlay for Beat Saber
 
 ![preview](https://i.imgur.com/fOg4TUp.png)
