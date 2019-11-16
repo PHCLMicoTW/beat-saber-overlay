@@ -19,7 +19,7 @@ A web-based overlay for Beat Saber
 
 ![image](https://imgur.com/KxowYrw.png)
 
-4. (Optional) ~~For 1080p canvases, add the `scale` modifier (ex. `http://overlay.reselim.io/?modifiers=scale`) to scale the overlay by 1.5x~~
+4. (Optional) For 1080p canvases, add the `scale` modifier (`<link rel="stylesheet" href="./modifiers/scale.css">`) in the `index.html` ~~(ex. `http://overlay.reselim.io/?modifiers=scale`) to scale the overlay by 1.5x~~
 
 ## Options
 
