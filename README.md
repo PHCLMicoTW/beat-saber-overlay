@@ -15,19 +15,15 @@ A web-based overlay for Beat Saber
 
 ![image](https://i.imgur.com/WyTjdtd.png)
 
-3. Set the URL as `http://overlay.reselim.io/` and the size equal to your canvas size (1280x720, etc.)
+3. Set the URL as [x]Local file and chose `index.html` and the size equal to your canvas size (1280x720, etc.)
 
 ![image](https://imgur.com/KxowYrw.png)
 
-4. (Optional) For 1080p canvases, add the `scale` modifier (ex. `http://overlay.reselim.io/?modifiers=scale`) to scale the overlay by 1.5x
+4. (Optional) ~~For 1080p canvases, add the `scale` modifier (ex. `http://overlay.reselim.io/?modifiers=scale`) to scale the overlay by 1.5x~~
 
 ## Options
 
 ~~Options are added to the URL query as such:~~
-
-```
-~~http://overlay.reselim.io/?modifiers=top~~
-```
 
 Options are adjust the HTML as such:
 
