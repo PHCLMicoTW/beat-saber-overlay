@@ -57,5 +57,7 @@ Adjust in `manager.js`
 ### `Dynamic lyric Player`
 
 Auto find lyric of the song if possible, using API from music.163.com (网易云音乐)
+
 `!!!**important**!!!` ->  It only search the song name+Author and use the first song return of API as the result, some time it may be wrong song, use it carefully!!
+
 Some how it only work for OBS now, and you must download this project to use it as local file.
