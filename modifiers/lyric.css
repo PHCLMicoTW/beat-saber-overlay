@@ -1,0 +1,14 @@
+.lyric-text {
+	font-family: "Comic Sans MS", "微軟正黑體", cursive, sans-serif;
+	font-size: 36px;
+	letter-spacing: 0.8px;
+	word-spacing: 1px;
+	color: #29EEFF;
+	font-weight: 700;
+	text-decoration: none;
+	font-style: italic;
+	font-variant: normal;
+	text-transform: none;
+	text-align: right;
+	text-shadow: 3px 3px 3px #CE6BC6;
+}

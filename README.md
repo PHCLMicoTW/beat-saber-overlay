@@ -1,4 +1,6 @@
-# (Unnamed) Beat Saber Overlay
+# `WIP`
+
+# (Unnamed) Beat Saber Overlay - With lyric displayer
 
 A web-based overlay for Beat Saber
 
@@ -19,15 +21,19 @@ A web-based overlay for Beat Saber
 
 ## Options
 
-Options are added to the URL query as such:
+~~Options are added to the URL query as such:~~
 
 ```
-http://overlay.reselim.io/?modifiers=top
+~~http://overlay.reselim.io/?modifiers=top~~
 ```
 
-### `ip` and `port`
+Options are adjust the HTML as such:
 
-Listen to events from another IP and/or port.
+add or remove
+```
+<link rel="stylesheet" href="./modifiers/top.css">
+```
+in `index.html`
 
 ### `modifiers`
 
@@ -41,3 +47,13 @@ Multiple modifiers can be seperated with commas.
 	* Scales the overlay by 1.5x, for use on 1080p canvases
 - `test`
 	* Makes the background black, for testing purposes
+	
+### `ip` and `port`
+
+Adjust in `manager.js`
+
+### `Dynamic lyric Player`
+
+Auto find lyric of the song if possible, using API from music.163.com (网易云音乐)
+`!!!**important**!!!` ->  It only search the song name+Author and use the first song return of API as the result, some time it may be wrong song, use it carefully!!
+Some how it only work for OBS now, and you must download this project to use it as local file.

@@ -214,3 +214,12 @@ body {
 #overlay #performance > *:nth-child(1) {
 	transition-delay: 300ms !important;
 }
+
+#lyricArea {
+	display: flex;
+    position: absolute;
+    right: 330px;
+    bottom: 60px;
+    direction: rtl;
+    width: 620px;
+}
