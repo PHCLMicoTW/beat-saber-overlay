@@ -218,7 +218,7 @@ body {
 #lyricArea {
 	display: flex;
     position: absolute;
-    right: 330px;
+    right: 315px;
     bottom: 60px;
     direction: rtl;
     width: 620px;

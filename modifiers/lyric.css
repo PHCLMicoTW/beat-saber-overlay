@@ -9,6 +9,7 @@
 	font-style: italic;
 	font-variant: normal;
 	text-transform: none;
-	text-align: right;
+	direction: ltr;
+	text-align:right;
 	text-shadow: 3px 3px 3px #CE6BC6;
 }

@@ -57,3 +57,9 @@ Auto find lyric of the song if possible, using API from music.163.com (网易云
 `!!!**important**!!!` ->  It only search the song name+Author and use the first song return of API as the result, some time it may be wrong song, use it carefully!!
 
 Somehow it only work for OBS use as local file now, and you must download this project to use it as local file to make it work.
+
+### `LyricGlobalDelay`
+
+If you have a low end pc like me and every time play a song your lyric aren't wait for song start, use this option in `ui.js` to adjust wait time for each song.
+
+Usage: `LyricGlobalDelay = {delay time in second}`

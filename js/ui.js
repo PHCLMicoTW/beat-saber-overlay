@@ -1,5 +1,7 @@
 const ui = (() => {
 	var main = document.getElementById("overlay");
+
+	var LyricGlobalDelay = 1.8;
 	
 	var LyricDisplayer = document.getElementById("lyric");
 	var LyricPlayable = false;
@@ -65,7 +67,7 @@ const ui = (() => {
 			}
 			
 			if(LyricPlayable && Lyrics.length > 0){
-				if(delta / 1000 >= Lyrics[0].time){
+				if((delta / 1000) - LyricGlobalDelay >= Lyrics[0].time){
 					LyricDisplayer.innerHTML = Lyrics[0].text;
 					Lyrics.shift();
 				}
@@ -185,7 +187,8 @@ const ui = (() => {
 			timer.start(Date.now(), data.length);
 			
 			try {
-				var q = data.songName.replace(/[\~|\`|\!|\$|\%|\^|\*|\(|\)|\+|\=|\||\\|\[|\]|\{|\}|\;|\"|\'|\,|\<|\>|\/|\?]/g,"") + " - " + data.songAuthorName.replace(/[\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,"");
+				var clearSongName = data.songName.replace('&', 'n').replace(/[\~|\`|\!|\☆|\★|\$|\%|\^|\*|\(|\)|\+|\=|\||\\|\[|\]|\{|\}|\;|\"|\'|\,|\<|\>|\/|\?]/g," ").replace(/  +/g, ' ');
+				var q = clearSongName + " + " + data.songAuthorName.replace(/[\~|\`|\!|\☆|\★|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\>|\/|\?]/g," ").replace(/  +/g, ' ');
 				console.log("Q: " + q);
 				$.ajax({
 					type: 'GET',
@@ -195,20 +198,78 @@ const ui = (() => {
 					data: "s=" + q.replace(" ", "%20") + "&limit=1&type=1",
 					error: function(xhr) { console.log("Something wrong when loading lyric!!!"); },
 					success: function(response){
-						if(!response.hasOwnProperty("songCount")){
-							var songId = response["result"]["songs"][0]["id"];
+						if(!response.hasOwnProperty("songCount") && response.hasOwnProperty("result")){
+							var SongID = response["result"]["songs"][0]["id"];
 							$.ajax({
 								type: 'GET',
 								crossDomain: true,
 								dataType:'json',
 								url: 'http://music.163.com/api/song/media',
-								data: "id=" + songId,
+								data: "id=" + SongID,
 								error: function(xhr) { console.log("Something wrong when loading lyric!!!"); },
 								success: function(response2){
 									if(response2.hasOwnProperty("lyric")){
-										Lyrics = parseLyric(response2["lyric"]);
+										Lyrics = parseLyric(Traditionalized(response2["lyric"]));
 										LyricPlayable = true;
+									} else {
+										console.log("Lyric not found, try to search by only name: " + clearSongName);
+										$.ajax({
+											type: 'GET',
+											crossDomain: true,
+											dataType:'json',
+											url: 'http://music.163.com/api/search/pc',
+											data: "s=" + clearSongName.replace(" ", "%20") + "&limit=1&type=1",
+											error: function(xhr) { console.log("Something wrong when loading lyric!!!"); },
+											success: function(response4){
+												if(!response4.hasOwnProperty("songCount") && response4.hasOwnProperty("result")){
+													var SongID2 = response4["result"]["songs"][0]["id"];
+													$.ajax({
+														type: 'GET',
+														crossDomain: true,
+														dataType:'json',
+														url: 'http://music.163.com/api/song/media',
+														data: "id=" + SongID2,
+														error: function(xhr) { console.log("Something wrong when loading lyric!!!"); },
+														success: function(response3){
+															if(response3.hasOwnProperty("lyric")){
+																Lyrics = parseLyric(Traditionalized(response3["lyric"]));
+																LyricPlayable = true;
+															} else { console.log("Can't find song lyric!!!"); }
+														} 
+													});
+												} else { console.log("Can't find song!!!"); }
+											}
+										});
 									}
+								}
+							});
+						} else {
+							console.log("Song not found, try to search by only name: " + clearSongName);
+							$.ajax({
+								type: 'GET',
+								crossDomain: true,
+								dataType:'json',
+								url: 'http://music.163.com/api/search/pc',
+								data: "s=" + clearSongName.replace(" ", "%20") + "&limit=1&type=1",
+								error: function(xhr) { console.log("Something wrong when loading lyric!!!"); },
+								success: function(response){
+									if(!response.hasOwnProperty("songCount")){
+										var SongID = response["result"]["songs"][0]["id"];
+										$.ajax({
+											type: 'GET',
+											crossDomain: true,
+											dataType:'json',
+											url: 'http://music.163.com/api/song/media',
+											data: "id=" + SongID,
+											error: function(xhr) { console.log("Something wrong when loading lyric!!!"); },
+											success: function(response2){
+												if(response2.hasOwnProperty("lyric")){
+													Lyrics = parseLyric(Traditionalized(response2["lyric"]));
+													LyricPlayable = true;
+												} else { console.log("Can't find song lyric!!!"); }
+											}
+										});
+									} else { console.log("Can't find song"); }
 								}
 							});
 						}
